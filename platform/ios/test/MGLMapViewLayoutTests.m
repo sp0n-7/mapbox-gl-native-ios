@@ -237,12 +237,16 @@
 
         //invoke layout
         [self.superView setNeedsLayout];
+#if defined(NS_BLOCK_ASSERTIONS)
+        NSLog(@"NSAssertions are blocked (Release build?), skipping layoutIfNeeded XCTAssert.");
+#else
         XCTAssertThrowsSpecificNamed(
                                      [self.superView layoutIfNeeded],
                                      NSException,
                                      NSInternalInconsistencyException,
                                      @"should throw NSInternalInconsistencyException"
                                      );
+#endif
     }
 }
 
@@ -277,8 +281,7 @@
 
             NSArray *testDataList = [self makeTestDataListWithView:scaleBar margin:margin];
 
-            CGSize initialSize = scaleBar.intrinsicContentSize;
-            XCTAssert(CGSizeEqualToSize(initialSize, scaleBar.bounds.size));
+            CGSize initialSize = scaleBar.bounds.size;
 
             for (MGLOrnamentTestData *testData in testDataList) {
                 self.mapView.scaleBarPosition = testData.position;
@@ -350,12 +353,17 @@
 
         //invoke layout
         [self.superView setNeedsLayout];
+#if defined(NS_BLOCK_ASSERTIONS)
+        NSLog(@"NSAssertions are blocked (Release build?), skipping layoutIfNeeded XCTAssert.");
+#else
+        
         XCTAssertThrowsSpecificNamed(
                                      [self.superView layoutIfNeeded],
                                      NSException,
                                      NSInternalInconsistencyException,
                                      @"should throw NSInternalInconsistencyException"
                                      );
+#endif
     }
 }
 
@@ -392,12 +400,17 @@
 
         //invoke layout
         [self.superView setNeedsLayout];
+#if defined(NS_BLOCK_ASSERTIONS)
+        NSLog(@"NSAssertions are blocked (Release build?), skipping layoutIfNeeded XCTAssert.");
+#else
+        
         XCTAssertThrowsSpecificNamed(
                                      [self.superView layoutIfNeeded],
                                      NSException,
                                      NSInternalInconsistencyException,
                                      @"should throw NSInternalInconsistencyException"
                                      );
+#endif
     }
 }
 
