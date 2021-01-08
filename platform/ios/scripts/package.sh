@@ -139,10 +139,15 @@ function copyAndMakeFatFramework {
     fi
 
     step "Merging ${NAME} simulator dynamic library into device dynamic library…"
-    lipo \
-        ${PRODUCTS}/${BUILDTYPE}-iphoneos/${NAME}.framework/${NAME} \
-        ${PRODUCTS}/${BUILDTYPE}-iphonesimulator/${NAME}.framework/${NAME} \
-        -create -output ${OUTPUT}/dynamic/${NAME}.framework/${NAME} | echo
+    # lipo \
+    #     ${PRODUCTS}/${BUILDTYPE}-iphoneos/${NAME}.framework/${NAME} \
+    #     ${PRODUCTS}/${BUILDTYPE}-iphonesimulator/${NAME}.framework/${NAME} \
+    #     -create -output ${OUTPUT}/dynamic/${NAME}.framework/${NAME} | echo
+    xcodebuild -create-xcframework \
+        -framework ${PRODUCTS}/${BUILDTYPE}-iphoneos/${NAME}.framework \
+        -framework ${PRODUCTS}/${BUILDTYPE}-iphonesimulator/${NAME}.framework \
+        -output ${OUTPUT}/dynamic/${NAME}.xcframework | echo
+
 }
 
 
